@@ -51,19 +51,19 @@ class Go {
       const code = e.keyCode
       switch (code) {
         case 38:
-          if (this.canMove(xIndex, yIndex, 'top')) return;
+          if (this.canMove(xIndex, yIndex, 'top')) return
           this.setPos(pos[0], pos[1] - this.h)
           break
         case 40:
-          if (this.canMove(xIndex, yIndex, 'bottom')) return;
+          if (this.canMove(xIndex, yIndex, 'bottom')) return
           this.setPos(pos[0], pos[1] + this.h)
           break
         case 37:
-          if (this.canMove(xIndex, yIndex, 'left')) return;
+          if (this.canMove(xIndex, yIndex, 'left')) return
           this.setPos(pos[0] - this.w, pos[1])
           break
         case 39:
-          if (this.canMove(xIndex, yIndex, 'right')) return;
+          if (this.canMove(xIndex, yIndex, 'right')) return
           this.setPos(pos[0] + this.w, pos[1])
       }
     })
