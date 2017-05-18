@@ -8,40 +8,44 @@
   <title>Document</title>
   <style>
     #cells {
+      position: relative;
+      margin: 30px auto;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      width: 440px;
     }
-    
+
     .row {
       display: flex;
       flex-direction: row;
     }
-    
+
     .cell {
       width: 20px;
       height: 20px;
       border: 1px solid transparent;
     }
-    
+
     .top {
       border-top-color: #000;
     }
-    
+
     .bottom {
       border-bottom-color: #000;
     }
-    
+
     .left {
       border-left-color: #000;
     }
-    
+
     .right {
       border-right-color: #000;
     }
-    
+
     .rat {
+      position: absolute;
       background: orange!important;
     }
   </style>
@@ -49,6 +53,8 @@
 
 <body>
   <div id="cells">
+    <div id="rat" class="cell rat">
+    </div>
     <div class="row">
       <div class="top cell"></div>
       <div class="top bottom right cell"></div>
@@ -490,6 +496,6 @@
       <div class="bottom cell"></div>
     </div>
   </div>
+  <script src="./1.js"></script>
 </body>
-
 </html>
