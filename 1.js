@@ -1,11 +1,8 @@
-const w = 22
-const h = 22
-
 class Go {
   constructor() {
     this.rows = document.querySelectorAll('.row')
-    this.x = 418
-    this.y = 418
+    this.x = 0
+    this.y = 0
     this.w = 22
     this.h = 22
     this.setPos(this.x, this.y)
