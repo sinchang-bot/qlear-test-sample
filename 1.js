@@ -1,16 +1,19 @@
 class Go {
   constructor() {
     this.rows = document.querySelectorAll('.row')
-    this.x = 0
-    this.y = 0
-    this.w = 22
-    this.h = 22
-    this.setPos(this.x, this.y)
+    this.rowIndex = 0
+    this.cellIndex = 0
+    this.findCell(this.cellIndex, this.rowIndex).classList.add('rat')
     this.keyboard()
   }
 
   findCell(rowIndex, cellIndex) {
     return this.rows[rowIndex] && this.rows[rowIndex].querySelectorAll('.cell')[cellIndex]
+  }
+
+  addClass(el) {
+    document.querySelector('#cells .rat').classList.remove('rat')
+    el.classList.add('rat')
   }
 
   isInclude(el, dir) {
@@ -21,55 +24,39 @@ class Go {
     return false
   }
 
-  disToIndex(x, y) {
-    if (x === 0 && y === 0) {
-      return [0, 0]
-    }
-
-    return [x / this.w, y / this.h]
-  }
-
-  setPos(x, y) {
-    this.rat = document.getElementById('rat')
-    rat.style.left = x + 'px'
-    rat.style.top = y + 'px'
-  }
-
-  getPos() {
-    return [parseInt(this.rat.style.left), parseInt(this.rat.style.top)]
-  }
-
   keyboard() {
     document.addEventListener('keydown', e => {
-      const pos = this.getPos()
-      const index = this.disToIndex(pos[0], pos[1])
-      const xIndex = index[0]
-      const yIndex = index[1]
+      const rowIndex = this.rowIndex
+      const cellIndex = this.cellIndex
       const code = e.keyCode
       switch (code) {
         case 38:
-          if (this.canMove(xIndex, yIndex, 'top')) return
-          this.setPos(pos[0], pos[1] - this.h)
+          if (this.canMove(rowIndex, cellIndex, 'top')) return
+          this.rowIndex = rowIndex - 1
           break
         case 40:
-          if (this.canMove(xIndex, yIndex, 'bottom')) return
-          this.setPos(pos[0], pos[1] + this.h)
+          if (this.canMove(rowIndex, cellIndex, 'bottom')) return
+          this.rowIndex = rowIndex + 1
           break
         case 37:
-          if (this.canMove(xIndex, yIndex, 'left')) return
-          this.setPos(pos[0] - this.w, pos[1])
+          if (this.canMove(rowIndex, cellIndex, 'left') || cellIndex === 0) return
+          this.cellIndex = cellIndex - 1
           break
         case 39:
-          if (this.canMove(xIndex, yIndex, 'right')) return
-          this.setPos(pos[0] + this.w, pos[1])
+          if (this.canMove(rowIndex, cellIndex, 'right') || cellIndex === 19) return
+          this.cellIndex = cellIndex + 1
+        default:
+          break
       }
+      this.ele = this.findCell(this.rowIndex, this.cellIndex)
+      this.addClass(this.ele)
     })
   }
 
-  canMove(xIndex, yIndex, dir) {
-    const ele = this.findCell(yIndex, xIndex)
-    if (!ele) return false
-    return this.isInclude(ele, dir)
+  canMove(rowIndex, cellIndex, dir) {
+    this.ele = this.findCell(rowIndex, cellIndex)
+    if (!this.ele) return false
+    return this.isInclude(this.ele, dir)
   }
 }
 
